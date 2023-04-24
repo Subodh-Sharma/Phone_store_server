@@ -3,7 +3,7 @@ import Express from 'express';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cors from "cors";
-// import path from "path";
+import path from "path";
 const app = Express();
 import userRouter from "./router/user.js"
 import dealerRouter from "./router/dealer.js"
@@ -19,18 +19,18 @@ app.use("/user",userRouter);
 app.use("/phone",phoneRouter);
 //-------------------Deployment code---------------------//
 
-// const __dirname = path.resolve('..');
-
-// if(process.env.NODE_ENV==="production"){
-//     app.use(Express.static(path.join(__dirname,"/Phone_Store/client/build")))
-//     app.get("*",(req,res)=>{
-//         res.sendFile(path.resolve(__dirname,"Phone_Store","client","build","index.html"))
-//     })
-// }else{
-//     app.get("/",(req,res)=>{
-//         res.send("server is running");
-//     })
-// }
+const __dirname1 = path.resolve();
+ console.log(__dirname1);
+if (process.env.NODE_ENV === "production") {
+  app.use(Express.static(path.join(__dirname1, "/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1, "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("Hello world");
+  });
+}
 
 //-------------------Deployment code---------------------//
 const port = process.env.PORT || 8000;
