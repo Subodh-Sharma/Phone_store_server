@@ -36,8 +36,8 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT;
 // const port = 8000;
 const url = process.env.DBURL;
-
-mongoose.connect(url).then(()=>{
+mongoose.set("strictQuery", false);
+mongoose.connect(url,).then(()=>{
     app.listen(port,()=>{
         console.log(`Listening at port ${port}`);
     })
