@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //-------------------Deployment code---------------------//
-const port = process.env.PORT || 8000;
+const port = process.env.PORT;
 // const port = 8000;
 const url = process.env.DBURL;
 
