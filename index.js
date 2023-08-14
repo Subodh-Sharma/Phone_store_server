@@ -19,18 +19,18 @@ app.use("/user",userRouter);
 app.use("/phone",phoneRouter);
 //-------------------Deployment code---------------------//
 
-const __dirname1 = path.resolve();
- console.log(__dirname1);
-if (process.env.NODE_ENV === "production") {
-  app.use(Express.static(path.join(__dirname1, "/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname1, "build", "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("Hello world");
-  });
-}
+// const __dirname1 = path.resolve();
+//  console.log(__dirname1);
+// if (process.env.NODE_ENV === "production") {
+//   app.use(Express.static(path.join(__dirname1, "/build")));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname1, "build", "index.html"));
+//   });
+// } else {
+//   app.get("/", (req, res) => {
+//     res.send("Hello world");
+//   });
+// }
 
 //-------------------Deployment code---------------------//
 const port = process.env.PORT;
