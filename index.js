@@ -36,7 +36,7 @@ app.use("/phone",phoneRouter);
 const port = process.env.PORT;
 // const port = 8000;
 const url = process.env.DBURL;
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", true);
 mongoose.connect(url,).then(()=>{
     app.listen(port,()=>{
         console.log(`Listening at port ${port}`);
