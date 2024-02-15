@@ -1,17 +1,30 @@
 import PhoneModel from "../model/phone.js";
 import mongoose from "mongoose";
+import { v2 as cloudinary } from 'cloudinary'
+
+cloudinary.config({ 
+    cloud_name: 'dxrujb2zf', 
+    api_key: '239812917649638', 
+    api_secret: 'Ymf5X19E1SezPmrkd_9dNw692x8'
+  });
 
 export const addphone = async (req, res) => {
+    try{
     const phone = req.body;
-    const newPhone = new PhoneModel({
-        ...phone,
-        addedBy: req.dealerId
-    });
-    try {
+    const file = req.files.imageFile;
+    cloudinary.uploader.upload(file.tempFilePath,async(error,result)=>{
+        const newPhone = new PhoneModel({
+            ...phone,
+            imageFile:result.url,
+            addedBy: req.dealerId
+        });
         await newPhone.save();
         res.status(201).json(newPhone);
-    } catch (error) {
-        res.status(404).json({ message: "Something Went Wrong." })
+    })
+    }
+
+    catch (error) {
+         res.status(404).json({ message: "Something Went Wrong." })
     }
 }
 

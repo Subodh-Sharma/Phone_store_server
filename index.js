@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import morgan from 'morgan';
 import cors from "cors";
 import path from "path";
+import fileUpload from 'express-fileupload';
+
 const app = Express();
 import userRouter from "./router/user.js"
 import dealerRouter from "./router/dealer.js"
@@ -13,6 +15,9 @@ app.use(Express.json({limit:"30mb",extended:true}));
 app.use(Express.urlencoded({limit:"30mb",extended: true}));
 app.use(morgan("dev"));
 app.use(cors());
+app.use(fileUpload({
+    useTempFiles:true
+}))
 
 app.use("/dealer",dealerRouter);
 app.use("/user",userRouter);
@@ -27,14 +32,14 @@ app.use("/phone",phoneRouter);
 //     res.sendFile(path.resolve(__dirname1, "build", "index.html"));
 //   });
 // } else {
-//   app.get("/", (req, res) => {
-//     res.send("Hello world");
-//   });
+  app.get("/", (req, res) => {
+    res.send("Hello world");
+  });
 // }
 
 //-------------------Deployment code---------------------//
-const port = process.env.PORT;
-// const port = 8000;
+// const port = process.env.PORT;
+const port = 8000;
 const url = process.env.DBURL;
 mongoose.set("strictQuery", true);
 mongoose.connect(url,).then(()=>{
