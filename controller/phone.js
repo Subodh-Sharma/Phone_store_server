@@ -11,14 +11,14 @@ cloudinary.config({
 export const addphone = async (req, res) => {
     try{
     const phone = req.body;
-    const file = req.files.imageFile;
-    let image = "";
-    await cloudinary.uploader.upload(file.tempFilePath,(error,result)=>{
-        image = result.url;
-    })
+    // const file = req.files.imageFile;
+    // let image = "null value";
+    // await cloudinary.uploader.upload(file.tempFilePath,(error,result)=>{
+    //     image = result.url;
+    // })
     const newPhone = new PhoneModel({
         ...phone,
-        imageFile:image,
+        // imageFile:image,
         addedBy: req.dealerId
     });
     await newPhone.save();
