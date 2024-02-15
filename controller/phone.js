@@ -12,15 +12,17 @@ export const addphone = async (req, res) => {
     try{
     const phone = req.body;
     const file = req.files.imageFile;
-    cloudinary.uploader.upload(file.tempFilePath,async(error,result)=>{
-        const newPhone = new PhoneModel({
-            ...phone,
-            imageFile:result.url,
-            addedBy: req.dealerId
-        });
-        await newPhone.save();
-        res.status(201).json(newPhone);
+    let image = "";
+    await cloudinary.uploader.upload(file.tempFilePath,(error,result)=>{
+        image = result.url;
     })
+    const newPhone = new PhoneModel({
+        ...phone,
+        imageFile:image,
+        addedBy: req.dealerId
+    });
+    await newPhone.save();
+    res.status(201).json(newPhone);
     }
     catch (error) {
         res.status(404).json({ message: "Something Went Wrong." })
