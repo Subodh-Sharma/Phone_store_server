@@ -23,7 +23,7 @@ const phoneSchema = mongoose.Schema({
     },
     imageFile:{
         type: String,
-        required: true
+        // required: true
     },
     price:{
         type: Number,

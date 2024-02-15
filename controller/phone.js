@@ -22,9 +22,8 @@ export const addphone = async (req, res) => {
         res.status(201).json(newPhone);
     })
     }
-
     catch (error) {
-         res.status(404).json({ message: "Something Went Wrong." })
+        res.status(404).json({ message: "Something Went Wrong." })
     }
 }
 
