@@ -39,7 +39,7 @@ app.use("/phone",phoneRouter);
 
 //-------------------Deployment code---------------------//
 // const port = process.env.PORT;
-const port = 8000;
+// const port = 8000;
 const url = process.env.DBURL;
 mongoose.set("strictQuery", true);
 mongoose.connect(url,).then(()=>{
