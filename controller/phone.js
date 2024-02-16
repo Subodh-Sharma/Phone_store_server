@@ -11,18 +11,15 @@ cloudinary.config({
 export const addphone = async (req, res) => {
     try{
     const phone = req.body;
-    // const file = req.files.imageFile;
-    // let image = "null value";
-    // await cloudinary.uploader.upload(file.tempFilePath,(error,result)=>{
-    //     image = result.url;
-    // })
+    const image = await cloudinary.uploader.upload(phone.imageFile);
+    console.log(image.url);
     const newPhone = new PhoneModel({
         ...phone,
-        // imageFile:image,
+        imageFile:image.url,
         addedBy: req.dealerId
     });
     await newPhone.save();
-    res.status(201).json(newPhone);
+    res.status(201).json("done");
     }
     catch (error) {
         res.status(404).json({ message: "Something Went Wrong." })
